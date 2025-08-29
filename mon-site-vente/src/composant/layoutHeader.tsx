@@ -1,26 +1,13 @@
-import {NavLink, Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom"
+import CustomNavLink from "./customnavLink"
 export default function LayoutHost() {
     return <div>
         <nav>
-            <NavLink
-                to='/host'
-                end
-             className={({isActive}:{isActive:boolean})=> isActive ? 'px-4 py-2 text-black font-bold text-2xl rounded-lg hover:bg-orange-500 transition-colors':'px-4 py-2 text-black font-medium rounded-lg hover:bg-orange-500 transition-colors'}
-              >
-                Dashboard
-              </NavLink>
-                <NavLink
-                to='/host/review'
-             className={({isActive}:{isActive:boolean})=> isActive ? 'px-4 py-2 text-black font-bold text-2xl rounded-lg hover:bg-orange-500 transition-colors':'px-4 py-2 text-black font-medium rounded-lg hover:bg-orange-500 transition-colors'}
-              >
-                Review
-              </NavLink>
-              <NavLink
-                to='/host/income'
-             className={({isActive}:{isActive:boolean})=> isActive ? 'px-4 py-2 text-black font-bold text-2xl rounded-lg hover:bg-orange-500 transition-colors':'px-4 py-2 text-black font-medium rounded-lg hover:bg-orange-500 transition-colors'}
-              >
-                Income
-              </NavLink>
+            
+              <CustomNavLink to="." end>Dashboard</CustomNavLink>
+              <CustomNavLink to="review">Review</CustomNavLink>
+              <CustomNavLink to="income">Income</CustomNavLink>
+              <CustomNavLink to="hostvan">Vans</CustomNavLink>
             </nav>
             <Outlet />
     </div>
