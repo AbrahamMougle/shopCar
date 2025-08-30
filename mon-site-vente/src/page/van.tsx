@@ -22,6 +22,28 @@ export default function Vans() {
     
     return (
         <> <h1>demo</h1>
+        <div className="flex gap-4 justify-center p-6">
+      <button className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition"
+      onClick={()=>setSearchParam({type:'simple'})
+       }>
+        Simple
+      </button>
+      <button className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition"
+      onClick={()=>setSearchParam({type:'luxury'})
+       }>
+        Luxury
+      </button>
+      <button className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition"
+      onClick={()=>setSearchParam({type:'rugged'})
+       }>
+        Rugged
+      </button>
+      <button className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition"
+      onClick={()=>setSearchParam({})
+       }>
+        Clear
+      </button>
+    </div>
     
             <h1 className="text-3xl font-bold">Explore Our Van option </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
