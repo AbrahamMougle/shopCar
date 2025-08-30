@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom"
 import CustomNavLink from "./customnavLink"
 export default function Header() {
     return <>
@@ -10,6 +9,7 @@ export default function Header() {
             <nav className="flex gap-4">
               <CustomNavLink to="host">host</CustomNavLink>
               <CustomNavLink to="about">About</CustomNavLink> 
+              <CustomNavLink to="van">Vans</CustomNavLink>
             </nav>
           </div>
         </header>
