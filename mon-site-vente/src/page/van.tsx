@@ -9,6 +9,7 @@ interface Van {
     type: string;
 }
 
+
 export default function Vans() {
     const [vans, setVans] = useState<Van[] | null>(null);
     const [searchParam, setSearchParam]=useSearchParams()
@@ -38,11 +39,19 @@ export default function Vans() {
        }>
         Rugged
       </button>
-      <button className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition"
-      onClick={()=>setSearchParam({})
-       }>
-        Clear
-      </button>
+      <button
+  disabled={!['simple', 'luxury', 'rugged'].includes(typeFilter ?? "")}
+  onClick={() => setSearchParam({})}
+  className={`px-6 py-2 rounded-lg transition 
+    ${
+      ['simple', 'luxury', 'rugged'].includes(typeFilter ?? "")
+        ? "bg-black text-white hover:bg-gray-800"
+        : "bg-gray-400 text-gray-200 cursor-not-allowed"
+    }`}
+>
+  Clear
+</button>
+
     </div>
     
             <h1 className="text-3xl font-bold">Explore Our Van option </h1>
