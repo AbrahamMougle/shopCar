@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { Routes, Route,BrowserRouter} from "react-router-dom"
 import Accueil from "./page/Acueil"
 import About from "./page/About"
 import Vans from "./page/van"
@@ -13,37 +13,63 @@ import HostDetailPrice from "./page/host/hostDetailPrice"
 import HostDetailPhoto from "./page/host/hostDetailPhoto"
 import HostVanDetail from "./page/host/hostVanDetail"
 import HostVans from "./page/host/hostVan"
+import VanDetail from "./page/VanDetail"
+import NotFound from "./page/notFound"
 
-export default function App() {
-
-    return (
-        <>
-            <BrowserRouter>
-
-                <main className="container mx-auto px-4 py-8">
-                    <Routes>
-                        <Route path="/" element={<Layout />}>
-                            <Route index element={<Accueil />} />
-                            <Route path="about" element={<About />} />
-                            <Route path="van" element={<Vans />} />
-                            <Route path="host" element={<LayoutHost />}>
-                                <Route index element={<Dashbord />} />
-                                <Route path="income" element={<Income />} />
-                                <Route path="review" element={<Review />} />
-                                <Route path="hostvan" element={<HostVans />} />
-                                <Route path="hostvan/:id" element={<HostVanDetail />} >
-                                    <Route index element={<HostDetailInfo/>} />
-                                    <Route path="price" element={<HostDetailPrice />} />
-                                    <Route path="photo" element={<HostDetailPhoto />} />
-                                </Route>
-                            </Route>
-                        </Route>
-                    </Routes>
-                </main>
-            </BrowserRouter>
-        </>
-    )
+function renderRoutes(routes: any[]) {
+  return routes.map((route, i) => (
+    <Route
+      key={i}
+      path={route.path}
+      element={route.element}
+      index={route.index}
+    >
+      {route.children && renderRoutes(route.children)}
+    </Route>
+  ));
 }
 
+export  function AppRoutes() {
+  const routes = [
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        { index: true, element: <Accueil /> },
+        { path: "about", element: <About /> },
+        { path: "van", element: <Vans /> },
+        { path: "van/:id", element: <VanDetail /> },
+        {
+          path: "host",
+          element: <LayoutHost />,
+          children: [
+            { index: true, element: <Dashbord /> },
+            { path: "income", element: <Income /> },
+            { path: "review", element: <Review /> },
+            { path: "hostvan", element: <HostVans /> },
+            {
+              path: "hostvan/:id",
+              element: <HostVanDetail />,
+              children: [
+                { index: true, element: <HostDetailInfo /> },
+                { path: "price", element: <HostDetailPrice /> },
+                { path: "photo", element: <HostDetailPhoto /> },
+              ],
+            },
+          ],
+        },
+        { path: "*", element: <NotFound /> },
+      ],
+    },
+  ];
 
+  return <Routes>{renderRoutes(routes)}</Routes>;
+}
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
+}
 
