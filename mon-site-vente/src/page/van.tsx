@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
+import fetcher from "../function/fetchVan";
 
 interface Van {
   id: number;
@@ -9,20 +10,6 @@ interface Van {
   urlImage: string;
   type: string;
 }
-
-interface VansResponse {
-  vans: Van[];
-}
-
-async function fetchVans(url: string): Promise<Van[]> {
-  const dataRequest = await fetch(url);
-  if (!dataRequest.ok) {
-    throw new Error(`Erreur HTTP ${dataRequest.status}: ${dataRequest.statusText}`);
-  }
-  const res: VansResponse = await dataRequest.json();
-  return res.vans ?? [];
-}
-
 export default function Vans() {
   const [vans, setVans] = useState<Van[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -34,13 +21,13 @@ export default function Vans() {
     ? vans?.filter((char) => char.type.toLocaleLowerCase() === typeFilter)
     : vans;
 
-    
+
   useEffect(() => {
     const data = async () => {
       try {
         setLoading(true);
-        const dataFetch = await fetchVans("/api/vans");
-        setVans(dataFetch);
+        const dataFetch = await fetcher<{vans:Van[]}>("/api/vans");
+        setVans(dataFetch.vans)
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -50,7 +37,17 @@ export default function Vans() {
     data();
   }, []);
 
-  if (loading) return <div>Chargement...</div>;
+  if (loading) {
+  return (
+    <div className="flex flex-col justify-center items-center h-[60vh] space-y-4">
+      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+      <span className="text-xl font-semibold text-gray-700 animate-pulse">
+        Chargement des vans...
+      </span>
+    </div>
+  );
+}
+
   if (error) return <div className="text-red-600">Erreur : {error}</div>;
 
   return (
