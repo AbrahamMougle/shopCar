@@ -1,7 +1,7 @@
-import { Routes, Route,BrowserRouter} from "react-router-dom"
+import { createBrowserRouter,RouterProvider} from "react-router-dom"
 import Accueil from "./page/Acueil"
 import About from "./page/About"
-import Vans from "./page/van"
+import Vans, {datafetch} from "./page/van"
 import './function/server'
 import Layout from "./page/Layout"
 import Dashbord from "./page/host/dashboard"
@@ -13,63 +13,54 @@ import HostDetailPrice from "./page/host/hostDetailPrice"
 import HostDetailPhoto from "./page/host/hostDetailPhoto"
 import HostVanDetail from "./page/host/hostVanDetail"
 import HostVans from "./page/host/hostVan"
-import VanDetail from "./page/VanDetail"
+import VanDetail, { loaderData } from "./page/VanDetail"
 import NotFound from "./page/notFound"
+import HandleErrorRouterVan from "./page/host/handleErrorRoute"
+import Contact from "./page/contact"
 
-function renderRoutes(routes: any[]) {
-  return routes.map((route, i) => (
-    <Route
-      key={i}
-      path={route.path}
-      element={route.element}
-      index={route.index}
-    >
-      {route.children && renderRoutes(route.children)}
-    </Route>
-  ));
-}
 
-export  function AppRoutes() {
-  const routes = [
-    {
-      path: "/",
-      element: <Layout />,
-      children: [
-        { index: true, element: <Accueil /> },
-        { path: "about", element: <About /> },
-        { path: "van", element: <Vans /> },
-        { path: "van/:id", element: <VanDetail /> },
-        {
-          path: "host",
-          element: <LayoutHost />,
-          children: [
-            { index: true, element: <Dashbord /> },
-            { path: "income", element: <Income /> },
-            { path: "review", element: <Review /> },
-            { path: "hostvan", element: <HostVans /> },
-            {
-              path: "hostvan/:id",
-              element: <HostVanDetail />,
-              children: [
-                { index: true, element: <HostDetailInfo /> },
-                { path: "price", element: <HostDetailPrice /> },
-                { path: "photo", element: <HostDetailPhoto /> },
-              ],
-            },
-          ],
-        },
-        { path: "*", element: <NotFound /> },
-      ],
-    },
-  ];
+const routesApp = [
+  {
+    path: "/",
+    element: <Layout / >,
+    errorElement:<HandleErrorRouterVan/>,
+    children: [
+      { index: true, element: <Accueil /> },
+      { path: "about", element: <About /> },
+       { path: "contact", element: <Contact/> },
+      { path: "van", element: <Vans /> , loader:datafetch},          // tu pourras ajouter loader ici
+      { path: "van/:id", element: <VanDetail />,loader:loaderData }, // et ici aussi
 
-  return <Routes>{renderRoutes(routes)}</Routes>;
+      {
+        path: "host",
+        element: <LayoutHost />,
+        children: [
+          { index: true, element: <Dashbord /> },
+          { path: "income", element: <Income /> },
+          { path: "review", element: <Review /> },
+          { path: "hostvan", element: <HostVans /> },
+          {
+            path: "hostvan/:id",
+            element: <HostVanDetail />,
+            children: [
+              { index: true, element: <HostDetailInfo /> },
+              { path: "price", element: <HostDetailPrice /> },
+              { path: "photo", element: <HostDetailPhoto /> },
+            ],
+          },
+        ],
+      },
+
+      { path: "*", element: <NotFound /> },
+    ],
+  },
+];
+
+const router = createBrowserRouter(routesApp);
+
+ function AppRouter() {
+  return <RouterProvider router={router} />;
 }
 export default function App() {
-  return (
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
-  );
+  return <AppRouter />;  // ✅ On appelle juste le router
 }
-
