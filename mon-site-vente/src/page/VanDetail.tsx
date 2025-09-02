@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link ,useLocation } from "react-router-dom";
+
 
 interface Van {
   id: string;          // Mirage renvoie l'id comme string
@@ -10,23 +11,39 @@ interface Van {
   type: string;
 }
 
+
 export default function VanDetail() {
   const { id } = useParams<{ id: string }>();
   const [van, setVan] = useState<Van | null>(null);
   const [loading, setLoading] = useState(true);
+  const [Error, setError] = useState();
 
+  const location=useLocation()
+  const type = location.state?.typeFilter ?? "";
+  
   useEffect(() => {
     fetch(`/api/vans/${id}`)
       .then(res => res.json())
       .then(data => setVan(data.van))
+      .catch(e=> setError(e))
       .finally(() => setLoading(false));
   }, [id]);
-
+  console.log(Error?.message);
+  
   if (loading) return <h1 className="text-center mt-10">Loading...</h1>;
   if (!van) return <h1 className="text-center mt-10">Van not found</h1>;
 
   return <>
-   <Link to='..'>Back to all vans</Link>
+  
+<Link
+  to={type ? `..?type=${encodeURIComponent(type)}` : ".."}
+  relative="path"
+  className="text-blue-600 hover:underline"
+>
+  Back {type || "All van"}
+</Link>
+
+
     <div className="max-w-md mx-auto p-4 border rounded-lg shadow-lg">
       <img
         src={van.urlImage}
@@ -55,3 +72,4 @@ export default function VanDetail() {
     </div>
   </>;
 }
+
