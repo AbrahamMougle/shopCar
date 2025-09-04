@@ -75,8 +75,8 @@ export default function Vans() {
                             <i
                                 className={`inline-block mt-3 px-2 py-1 text-sm rounded text-white ${van.type === "luxury"
                                         ? "bg-yellow-500"
-                                        : van.type === "camper"
-                                            ? "bg-green-500"
+                                        : van.type === "rugged"
+                                            ? 'bg-green-500'
                                             : "bg-red-500"
                                     }`}
                             >

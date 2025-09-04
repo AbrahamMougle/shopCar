@@ -1,7 +1,7 @@
-import { createBrowserRouter,RouterProvider} from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Accueil from "./page/Acueil"
 import About from "./page/About"
-import Vans, {datafetch} from "./page/van"
+import Vans, { datafetch } from "./page/van"
 import './function/server'
 import Layout from "./page/Layout"
 import Dashbord from "./page/host/dashboard"
@@ -17,26 +17,30 @@ import VanDetail, { loaderData } from "./page/VanDetail"
 import NotFound from "./page/notFound"
 import HandleErrorRouterVan from "./page/host/handleErrorRoute"
 import Contact from "./page/contact"
-
+import Auth from "./page/auth"
 
 const routesApp = [
   {
     path: "/",
-    element: <Layout / >,
-    errorElement:<HandleErrorRouterVan/>,
+    element: <Layout />,
+    errorElement: <HandleErrorRouterVan />,
     children: [
-      { index: true, element: <Accueil /> },
-      { path: "about", element: <About /> },
-       { path: "contact", element: <Contact/> },
-      { path: "van", element: <Vans /> , loader:datafetch},          // tu pourras ajouter loader ici
-      { path: "van/:id", element: <VanDetail />,loader:loaderData }, // et ici aussi
-
+      { index: true, element: <Accueil />},
+      { path: "about", element: <About />},
+      { path: "contact", element: <Contact /> },
+      {
+        element:<Auth />,
+        children: [
+          { path: 'van', element: <Vans />, loader: datafetch },          // tu pourras ajouter loader ici
+          { path: "van/:id", element: <VanDetail />, loader: loaderData },
+        ]
+      },
       {
         path: "host",
         element: <LayoutHost />,
         children: [
           { index: true, element: <Dashbord /> },
-          { path: "income", element: <Income /> },
+          { path: "income", element: <Income />},
           { path: "review", element: <Review /> },
           { path: "hostvan", element: <HostVans /> },
           {
@@ -58,7 +62,7 @@ const routesApp = [
 
 const router = createBrowserRouter(routesApp);
 
- function AppRouter() {
+function AppRouter() {
   return <RouterProvider router={router} />;
 }
 export default function App() {
