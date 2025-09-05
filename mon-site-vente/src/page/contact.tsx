@@ -7,9 +7,14 @@ type FetchError = {
 };
 
 export async function action({ request }: { request: Request }) {
+
+const pathname=new URL(request.url).searchParams.get('redirectTo')|| '/'
+console.log(pathname);
+
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
+
   await new Promise(resolve => setTimeout(resolve, 1000))// pour similer un retard enfin  de voir les effet du boutons
  const res = await fetch("/api/login", {
     method: "POST",
@@ -24,10 +29,10 @@ export async function action({ request }: { request: Request }) {
     
     return { statusText: res.statusText, message: error.message };
   }
-
-const response=redirect('/')
-console.log(response);
-
+  
+  localStorage.setItem('isAuth','true')// il nous faut ce bout de code pour ne pas revenir encore sur la page contact car lorsque la redirectyion est faite le loader du router correspondant va s'executer et si la valeur de isAuth n'est pas different des falsy il renvoie encore a la page de contact 
+  
+const response=redirect(pathname)
 response.body=true
 throw response
 
@@ -44,10 +49,11 @@ export default function Contact() {
 
   return (<>
   {
-    urlparam && <h1 className="text-red-600 text-center">Connecter vous d'abord </h1>
+    urlparam && <h1 className="text-red-600 text-center"> {urlparam} </h1>
   }
     <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
       <Form
+      replace
         method="post"
         className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md space-y-4"
       >
