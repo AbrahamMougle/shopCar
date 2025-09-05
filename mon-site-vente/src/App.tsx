@@ -22,9 +22,9 @@ import Contact, { action } from "./page/contact"
 function requireAuth(resquest:Request) {
   const isAuth=localStorage.getItem("isAuth")
    console.log(resquest);
-   const url = new URL(resquest.url).pathname
+   const pathname = new URL(resquest.url).pathname
   if (!isAuth) {
-    const response = redirect(`/contact?message=veuillez connecter.&redirectTo=${url}`)
+    const response = redirect(`/connecte?message=veuillez connecter.&redirectTo=${pathname}`)
     response.body=true
     throw response
   }
@@ -39,7 +39,7 @@ const routesApp = [
     children: [
       { index: true, element: <Accueil />, loader: ({ request }: { request: Request }) => { requireAuth(request) } },
       { path: "about", element: <About />, loader:({ request }: { request: Request }) => { requireAuth(request) } },
-      { path: "contact", element: <Contact />, action: action, },
+      { path: "connecte", element: <Contact />, action: action, },
       { path: 'van', element: <Vans />, loader: datafetch },
       { path: "van/:id", element: <VanDetail />, loader: loaderData },
 

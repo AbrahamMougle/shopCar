@@ -223,7 +223,7 @@ server.create("van", {
       return schema.vans.find(id);
     });
     this.post("/login", async (schema, request) => {
-      await new Promise(resolve => setTimeout(resolve, 200))
+
      const {email, password} = JSON.parse(request.requestBody)
      const foundUser = schema.users.findBy({email, password})
      if (!foundUser) { 

@@ -10,7 +10,7 @@ export default function Header() {
               <CustomNavLink to="host">host</CustomNavLink>
               <CustomNavLink to="about">About</CustomNavLink> 
               <CustomNavLink to="van">Vans</CustomNavLink>
-              <CustomNavLink to="contact">Contact</CustomNavLink>
+              <CustomNavLink to="connecte">Connecte</CustomNavLink>
             </nav>
           </div>
         </header>

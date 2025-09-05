@@ -58,7 +58,7 @@ export default function Contact() {
         className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md space-y-4"
       >
         <h1 className="text-2xl font-bold text-center text-gray-800">
-          Contactez-nous
+         🚐 Connectez-vous
         </h1>
 
         {actionData && (
