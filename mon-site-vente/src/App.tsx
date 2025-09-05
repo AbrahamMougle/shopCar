@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom"
 import Accueil from "./page/Acueil"
 import About from "./page/About"
 import Vans, { datafetch } from "./page/van"
@@ -16,31 +16,39 @@ import HostVans from "./page/host/hostVan"
 import VanDetail, { loaderData } from "./page/VanDetail"
 import NotFound from "./page/notFound"
 import HandleErrorRouterVan from "./page/host/handleErrorRoute"
-import Contact from "./page/contact"
-import Auth from "./page/auth"
+import Contact, { action } from "./page/contact"
 
+
+function requireAuth(resquest:Request) {
+  const isAuth=localStorage.getItem("isAuth")
+   console.log(resquest);
+   const url = new URL(resquest.url).pathname
+  if (!isAuth) {
+    const response = redirect(`/contact?message=veuillez connecter.&redirectTo=${url}`)
+    response.body=true
+    throw response
+  }
+  return null
+  
+}
 const routesApp = [
   {
     path: "/",
     element: <Layout />,
     errorElement: <HandleErrorRouterVan />,
     children: [
-      { index: true, element: <Accueil />},
-      { path: "about", element: <About />},
-      { path: "contact", element: <Contact /> },
-      {
-        element:<Auth />,
-        children: [
-          { path: 'van', element: <Vans />, loader: datafetch },          // tu pourras ajouter loader ici
-          { path: "van/:id", element: <VanDetail />, loader: loaderData },
-        ]
-      },
+      { index: true, element: <Accueil />, loader: ({ request }: { request: Request }) => { requireAuth(request) } },
+      { path: "about", element: <About />, loader:({ request }: { request: Request }) => { requireAuth(request) } },
+      { path: "contact", element: <Contact />, action: action, },
+      { path: 'van', element: <Vans />, loader: datafetch },
+      { path: "van/:id", element: <VanDetail />, loader: loaderData },
+
       {
         path: "host",
         element: <LayoutHost />,
         children: [
           { index: true, element: <Dashbord /> },
-          { path: "income", element: <Income />},
+          { path: "income", element: <Income /> },
           { path: "review", element: <Review /> },
           { path: "hostvan", element: <HostVans /> },
           {
