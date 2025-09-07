@@ -12,7 +12,7 @@ import HostDetailInfo from "./page/hostVandetailInfo"
 import HostDetailPrice from "./page/host/hostDetailPrice"
 import HostDetailPhoto from "./page/host/hostDetailPhoto"
 import HostVanDetail from "./page/host/hostVanDetail"
-import HostVans from "./page/host/hostVan"
+import HostVans ,{loaderHost}  from "./page/host/hostVan"
 import VanDetail, { loaderData } from "./page/VanDetail"
 import NotFound from "./page/notFound"
 import HandleErrorRouterVan from "./page/host/handleErrorRoute"
@@ -50,9 +50,9 @@ const routesApp = [
           { index: true, element: <Dashbord /> },
           { path: "income", element: <Income /> },
           { path: "review", element: <Review /> },
-          { path: "hostvan", element: <HostVans /> },
+          { path: "vans", element: <HostVans />,loader:loaderHost },
           {
-            path: "hostvan/:id",
+            path: "vans/:id",
             element: <HostVanDetail />,
             children: [
               { index: true, element: <HostDetailInfo /> },
