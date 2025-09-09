@@ -3,7 +3,7 @@ import { useParams, Link, Outlet } from "react-router-dom";
 import NavigatorDetail from "../../composant/navigatorDetail";
 
 interface Van {
-  id: string;          // Mirage renvoie l'id comme string
+  id: string;
   name: string;
   price: number;
   description: string;
@@ -28,11 +28,17 @@ export default function HostVanDetail() {
 
   return (
     <>
-      <Link to=".." relative="path" className="block mb-4">Back to all vans</Link>
-      
-      <div className="flex max-w-5xl mx-auto gap-6">
+      <Link
+        to=".."
+        relative="path"
+        className="block mb-4 text-blue-600 hover:underline"
+      >
+        ← Back to all vans
+      </Link>
+
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
         {/* Contenu principal */}
-        <div className="flex-1 p-4 border rounded-lg shadow-lg">
+        <div className="md:col-span-3 p-4 border rounded-lg shadow-lg bg-white">
           <img
             src={van.urlImage}
             alt={van.name}
@@ -51,7 +57,8 @@ export default function HostVanDetail() {
           </i>
           <h1 className="text-xl font-bold mt-2">{van.name}</h1>
           <p className="text-gray-700 mt-1">
-            ${van.price} <span className="text-sm text-gray-500">/day</span>
+            ${van.price}{" "}
+            <span className="text-sm text-gray-500">/day</span>
           </p>
           <p className="text-gray-600 mt-2">{van.description}</p>
           <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
@@ -59,14 +66,12 @@ export default function HostVanDetail() {
           </button>
         </div>
 
-        {/* Navigation à droite */}
-        <div className="w-1/4">
+        {/* Sidebar */}
+        <div className="md:col-span-1 h-fit p-4 bg-white rounded-lg shadow-md">
           <NavigatorDetail />
           <Outlet context={van} />
         </div>
       </div>
-
-      
     </>
   );
 }

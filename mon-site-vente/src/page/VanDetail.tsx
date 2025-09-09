@@ -26,51 +26,56 @@ export async function loaderData({
 }
 
 export default function VanDetail() {
-  const { van } = useLoaderData<typeof loaderData>(); // ✅ destructuré directement
+  const { van } = useLoaderData<typeof loaderData>();
   const location = useLocation();
   const typeFilter = location.state?.typeFilter ?? "";
 
+  // 🎨 Couleurs sobres + cohérentes
   const typeColors: Record<Van["type"], string> = {
-    luxury: "bg-yellow-500",
-    rugged: "bg-green-500",
-    simple: "bg-red-500",
+    luxury: "bg-primary-500",
+    rugged: "bg-primary-700",
+    simple: "bg-primary-900",
   };
 
   return (
-    <>
+    <div className="max-w-2xl mx-auto p-6">
+      {/* Lien retour */}
       <Link
         to={typeFilter ? `..?type=${encodeURIComponent(typeFilter)}` : ".."}
         relative="path"
-        className="text-blue-600 hover:underline"
+        className="inline-block text-sm text-gray-600 hover:text-gray-900 transition-colors mb-6"
       >
-        Back {typeFilter || "All vans"}
+        ← Retour {typeFilter || "tous les vans"}
       </Link>
 
-      <div className="max-w-md mx-auto p-4 border rounded-lg shadow-lg">
+      {/* Carte van */}
+      <div className="border rounded-lg shadow-sm overflow-hidden bg-white">
         <img
           src={van.urlImage}
           alt={van.name}
-          className="w-full h-64 object-cover rounded"
+          className="w-full h-64 object-cover"
         />
 
-        <i
-          className={`inline-block mt-2 px-2 py-1 text-sm rounded text-white ${
-            typeColors[van.type]
-          }`}
-        >
-          {van.type}
-        </i>
+        <div className="p-6">
+          <span
+            className={`inline-block px-3 py-1 text-xs rounded text-white ${typeColors[van.type]}`}
+          >
+            {van.type}
+          </span>
 
-        <h1 className="text-xl font-bold mt-2">{van.name}</h1>
-        <p className="text-gray-700 mt-1">
-          ${van.price} <span className="text-sm text-gray-500">/day</span>
-        </p>
-        <p className="text-gray-600 mt-2">{van.description}</p>
+          <h1 className="text-2xl font-bold mt-3 text-gray-900">{van.name}</h1>
+          <p className="text-gray-700 mt-2">
+            <span className="text-lg font-semibold">${van.price}</span>{" "}
+            <span className="text-sm text-gray-500">/jour</span>
+          </p>
 
-        <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-          Rent this van
-        </button>
+          <p className="text-gray-600 mt-4 leading-relaxed">{van.description}</p>
+
+          <button className={`mt-6 w-full md:w-auto px-6 py-3 ${typeColors[van.type]} text-white rounded-lg font-medium hover:bg-gray-800 hover:scale-105 transition`}>
+            Réserver ce van
+          </button>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

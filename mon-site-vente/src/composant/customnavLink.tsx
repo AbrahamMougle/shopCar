@@ -1,19 +1,19 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"
 
 interface CustomNavLinkProps {
-  to: string;
-  children: React.ReactNode;
-  activeClass?: string;
-  inactiveClass?: string;
-  end?: boolean; // Correction ici
+  to: string
+  children: React.ReactNode
+  activeClass?: string
+  inactiveClass?: string
+  end?: boolean
 }
 
 export default function CustomNavLink({
   to,
   children,
-  activeClass = "px-4 py-2 text-red-500 font-bold text-2xl rounded-lg hover:bg-orange-500 transition-colors",
-  inactiveClass = "px-4 py-2 text-yellow-500 font-medium rounded-lg hover:bg-orange-500 transition-colors",
-  end = false, // Valeur par défaut
+  activeClass = "text-white font-bold  px-2 py-1 text-lg underline transition-all duration-200",
+  inactiveClass = "text-gray-100 font-bold text-lg hover:text-white hover:scale-105 px-2 py-1 transition-all duration-200",
+  end = false,
 }: CustomNavLinkProps) {
   return (
     <NavLink
@@ -23,5 +23,5 @@ export default function CustomNavLink({
     >
       {children}
     </NavLink>
-  );
+  )
 }

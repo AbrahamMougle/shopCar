@@ -12,6 +12,7 @@ interface Van {
     urlImage: string;
     type: "luxury" | "rugged" | "simple";
 }
+
 export default function HostVans() {
     const vans = useLoaderData<typeof loaderHost>().vans
     const typeColors: Record<Van["type"], string> = {

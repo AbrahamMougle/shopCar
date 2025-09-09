@@ -1,4 +1,4 @@
-import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Accueil from "./page/Acueil"
 import About from "./page/About"
 import Vans, { datafetch } from "./page/van"
@@ -17,20 +17,11 @@ import VanDetail, { loaderData } from "./page/VanDetail"
 import NotFound from "./page/notFound"
 import HandleErrorRouterVan from "./page/host/handleErrorRoute"
 import Contact, { action } from "./page/contact"
+import Resgister from "./page/Register"
+import requireAuth from "./function/requireAuth"
 
 
-function requireAuth(resquest:Request) {
-  const isAuth=localStorage.getItem("isAuth")
-   console.log(resquest);
-   const pathname = new URL(resquest.url).pathname
-  if (!isAuth) {
-    const response = redirect(`/connecte?message=veuillez connecter.&redirectTo=${pathname}`)
-    response.body=true
-    throw response
-  }
-  return null
-  
-}
+
 const routesApp = [
   {
     path: "/",
@@ -40,6 +31,7 @@ const routesApp = [
       { index: true, element: <Accueil />, loader: ({ request }: { request: Request }) => { requireAuth(request) } },
       { path: "about", element: <About />, loader:({ request }: { request: Request }) => { requireAuth(request) } },
       { path: "connecte", element: <Contact />, action: action, },
+      { path: "register", element: <Resgister />},
       { path: 'van', element: <Vans />, loader: datafetch },
       { path: "van/:id", element: <VanDetail />, loader: loaderData },
 

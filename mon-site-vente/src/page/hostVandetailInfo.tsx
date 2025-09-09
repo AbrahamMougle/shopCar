@@ -10,7 +10,7 @@ interface Van {
 export default function HostDetailInfo() {
 const {description}=useOutletContext<Van>()    
     return (
-        <div className=" text-3xl">
+        <div>
          {
             description
          }

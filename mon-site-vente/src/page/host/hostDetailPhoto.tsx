@@ -1,4 +1,5 @@
-import { useOutletContext } from "react-router-dom"
+import { useOutletContext } from "react-router-dom";
+
 interface Van {
   id: string;          // Mirage renvoie l'id comme string
   name: string;
@@ -9,15 +10,19 @@ interface Van {
 }
 
 export default function HostDetailPhoto() {
-   const van  = useOutletContext<Van>();
-    
-    
-    return (
-        <div >
-         <h1>Nom: {van.name} </h1>  
-         <h1>Description: {van.description} </h1>
-         <h1>Price: {van.price} </h1>  
-         <h1>Type: {van.type} </h1>    
-        </div>
-    )
+  const van = useOutletContext<Van>();
+
+  return (
+    <div className="van-detail">
+      <img 
+        src={van.urlImage} 
+        alt={`Image of ${van.name}`} 
+        className="van-image"
+      />
+      <h2><strong>Name:</strong>{van.name}</h2>
+      <p><strong>Description:</strong>{van.description}</p>
+      <p><strong>Price:</strong> ${van.price}</p>
+      <p><strong>Type:</strong> {van.type}</p>
+    </div>
+  );
 }

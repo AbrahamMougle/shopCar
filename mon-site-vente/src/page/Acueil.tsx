@@ -1,40 +1,70 @@
+import { Bus, MapPin, Star } from "lucide-react"
+import { Link } from "react-router-dom"
+
 export default function Home() {
   return (
-    <div className="max-w-4xl mx-auto">
-      {/* Section Hero avec image et texte */}
-      <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
-        {/* Image */}
-        <div className="flex-1">
-          <img 
-            src="https://images.unsplash.com/photo-1533575770077-052fa2c609fc?ixlib=rb-4.0.1&auto=format&fit=crop&w=500&q=80" 
-            alt="Van en pleine nature" 
-            className="w-full h-64 object-cover rounded-lg shadow-md"
-          />
-        </div>
-        
-        {/* Texte */}
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">
-            Découvrez la <span className="text-orange-500">liberté</span> sur roues
+    <div className="max-w-6xl mx-auto px-4 mt-4">
+      {/* Section Hero avec image de fond */}
+      <section
+        className="relative bg-cover bg-center rounded-2xl overflow-hidden h-[500px] flex items-center justify-center text-center md:text-left px-6"
+        style={{
+          backgroundImage:
+            "url('/vanPhoto/van5.jpg')",
+        }}
+      >
+        {/* Overlay sombre pour lisibilité */}
+        <div className="absolute inset-0 bg-black/40"></div>
+
+        {/* Contenu */}
+        <div className="relative z-10 max-w-2xl text-white">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
+            Découvrez la <span className="text-primary-400">liberté</span> sur roues
           </h1>
-          <p className="text-gray-600 text-lg">
-            Vivez l'aventure van life avec nos véhicules entièrement aménagés. 
-            Parcourez les plus beaux paysages en toute liberté et créez des souvenirs inoubliables.
+          <p className="text-lg md:text-xl mb-6 text-gray-100">
+            Vivez l&apos;aventure van life avec nos véhicules aménagés. 
+            Parcourez les plus beaux paysages et créez des souvenirs inoubliables.
           </p>
+          <Link to="van">
+            <button className="bg-primary-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-600 hover:scale-105 transition-all">
+              Explorer nos vans
+            </button>
+          </Link>
         </div>
       </section>
 
-      {/* Section supplémentaire */}
-      <section className="bg-gray-50 rounded-lg p-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+      {/* Section Avantages */}
+      <section className="bg-gray-50 rounded-2xl p-8 md:p-12 shadow-sm my-16">
+        <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">
           Pourquoi choisir notre service ?
         </h2>
-        <p className="text-gray-600">
-          Nous proposons des vans modernes, confortables et parfaitement équipés pour 
-          vous offrir une expérience de voyage exceptionnelle. Que vous partiez pour 
-          un week-end ou pour une grande aventure, nous avons le van qu'il vous faut.
-        </p>
+
+        {/* Grille Avantages */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="flex flex-col items-center text-center p-6 rounded-lg hover:shadow-md transition-shadow">
+            <Bus className="w-12 h-12 text-primary-500 mb-4" />
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Confort total</h3>
+            <p className="text-gray-600 text-sm">
+              Des vans modernes et équipés pour voyager sans compromis.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center text-center p-6 rounded-lg hover:shadow-md transition-shadow">
+            <MapPin className="w-12 h-12 text-primary-500 mb-4" />
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Liberté</h3>
+            <p className="text-gray-600 text-sm">
+              Explorez où vous voulez, quand vous voulez, sans contraintes.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center text-center p-6 rounded-lg hover:shadow-md transition-shadow">
+            <Star className="w-12 h-12 text-primary-500 mb-4" />
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Expérience unique</h3>
+            <p className="text-gray-600 text-sm">
+              Un mode de voyage authentique qui crée des souvenirs durables.
+            </p>
+          </div>
+        </div>
       </section>
     </div>
-  );
+  )
 }
