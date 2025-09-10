@@ -143,51 +143,7 @@ export default function VanRentalCharts() {
     ],
   };
  
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false, // permet de fixer une hauteur custom
-    plugins: {
-      legend: {
-        position: "top" as const,
-        labels: {
-          font: { size: 14, weight: "bold" },
-          color: "#333",
-        },
-      },
-      title: {
-        display: true,
-        text: `Évolution des locations de vans (${year})`,
-        font: { size: 18, weight: "bold" },
-        color: "#111",
-      },
-      tooltip: {
-        mode: "index" as const,
-        intersect: false,
-      },
-    },
-    interaction: {
-      mode: "nearest" as const,
-      axis: "x" as const,
-      intersect: false,
-    },
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: "Mois",
-          font: { size: 14, weight: "bold" },
-        },
-      },
-      y: {
-        beginAtZero: true,
-        title: {
-          display: true,
-          text: "Nombre de vans loués",
-          font: { size: 14, weight: "bold" },
-        },
-      },
-    },
-  };
+  
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
@@ -195,7 +151,7 @@ export default function VanRentalCharts() {
       <div className="flex justify-center mb-6">
         <select
           value={year}
-          onChange={(e) => setYear(e.target.value as keyof typeof rentalData)}
+          onChange={(e) => setYear(Number(e.target.value) as keyof typeof rentalData)}
           className="border px-4 py-2 rounded shadow"
         >
           {Object.keys(rentalData).map((y) => (
@@ -209,7 +165,7 @@ export default function VanRentalCharts() {
       {/* Canevas plus grand */}
       <div className="bg-white border rounded-xl shadow-lg p-4">
         <div className="h-[500px]"> {/* Hauteur personnalisée */}
-          <Line data={data} options={options} />
+          <Line data={data} />
         </div>
       </div>
     </div>

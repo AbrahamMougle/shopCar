@@ -4,7 +4,7 @@ export default function requireAuth(resquest:Request) {
    const pathname = new URL(resquest.url).pathname
   if (!isAuth) {
     const response = redirect(`/connecte?message=veuillez connecter.&redirectTo=${pathname}`)
-    response.body=true
+   /* response.body=true  ce bout de code vest tres utile en local */
     throw response
   }
   return null
