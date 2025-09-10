@@ -4,12 +4,10 @@ import About from "./page/About"
 import Vans, { datafetch } from "./page/van"
 import './function/server'
 import Layout from "./page/Layout"
-import Dashbord from "./page/host/dashboard"
 import Income from "./page/host/income"
 import LayoutHost from "./composant/layoutHeader"
 import Review from "./page/host/review"
 import HostDetailInfo from "./page/hostVandetailInfo"
-import HostDetailPrice from "./page/host/hostDetailPrice"
 import HostDetailPhoto from "./page/host/hostDetailPhoto"
 import HostVanDetail from "./page/host/hostVanDetail"
 import HostVans ,{loaderHost}  from "./page/host/hostVan"
@@ -38,9 +36,8 @@ const routesApp = [
       {
         path: "host",
         element: <LayoutHost />,
-        children: [
-          { index: true, element: <Dashbord /> },
-          { path: "income", element: <Income /> },
+        children: [ 
+          { index:true ,path: "income", element: <Income /> },
           { path: "review", element: <Review /> },
           { path: "vans", element: <HostVans />,loader:loaderHost },
           {
@@ -48,7 +45,7 @@ const routesApp = [
             element: <HostVanDetail />,
             children: [
               { index: true, element: <HostDetailInfo /> },
-              { path: "price", element: <HostDetailPrice /> },
+    
               { path: "photo", element: <HostDetailPhoto /> },
             ],
           },
