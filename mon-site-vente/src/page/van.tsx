@@ -1,16 +1,7 @@
 import { useSearchParams, Link, useLoaderData } from "react-router-dom";
-import { Filter } from "lucide-react"; // Icône filtre
+import { Filter } from "lucide-react"; 
 import fetcher from "../function/fetchVan";
-
-interface Van {
-  id: number;
-  name: string;
-  price: number;
-  description: string;
-  urlImage: string;
-  type: "luxury" | "rugged" | "simple";
-}
-
+import type { Van } from "../../type/van";
 export async function datafetch(): Promise<{ vans: Van[] }> {
   return await fetcher("/api/vans");
 }

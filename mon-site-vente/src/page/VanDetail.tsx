@@ -5,17 +5,7 @@ import {
   type LoaderFunctionArgs,
 } from "react-router-dom";
 import fetcher from "../function/fetchVan";
-
-interface Van {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-  urlImage: string;
-  type: "luxury" | "rugged" | "simple";
-}
-
-// ✅ Le loader retourne bien { van: Van }
+import type { Van } from "../../type/van";
 export async function loaderData({
   params,
 }: LoaderFunctionArgs): Promise<{ van: Van }> {

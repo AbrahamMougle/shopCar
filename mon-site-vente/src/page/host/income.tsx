@@ -15,7 +15,7 @@
       { month: "Nov", count: 9 },
       { month: "Dec", count: 11 },
     ],
-    camper: [
+    Rugged: [
       { month: "Jan", count: 5 },
       { month: "Feb", count: 7 },
       { month: "Mar", count: 6 },
@@ -59,7 +59,7 @@
       { month: "Nov", count: 9 },
       { month: "Dec", count: 11 },
     ],
-    camper: [
+    Rugged: [
       { month: "Jan", count: 5 },
       { month: "Feb", count: 7 },
       { month: "Mar", count: 6 },
@@ -128,8 +128,8 @@ export default function VanRentalCharts() {
         tension: 0.3,
       },
       {
-        label: "Camper Vans",
-        data: rentalData[year].camper.map((item) => item.count),
+        label: "Rugged Vans",
+        data: rentalData[year].Rugged.map((item) => item.count),
         borderColor: "oklch(0.40 0.15 250)",
         backgroundColor: "oklch(0.40 0.15 250 / 0.3)",
         fill: true,
@@ -203,7 +203,7 @@ export default function VanRentalCharts() {
       </div>
 
       {/* Container responsive */}
-      <div className="bg-white border rounded-xl shadow-lg p-4">
+      <div className="bg-white border rounded-md shadow-lg p-4">
         <div className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px]">
           <Line data={data} options={options} />
         </div>

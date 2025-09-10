@@ -19,10 +19,7 @@ export default function HostDetailPhoto() {
         alt={`Image of ${van.name}`} 
         className="van-image"
       />
-      <h2><strong>Name:</strong>{van.name}</h2>
-      <p><strong>Description:</strong>{van.description}</p>
-      <p><strong>Price:</strong> ${van.price}</p>
-      <p><strong>Type:</strong> {van.type}</p>
+      
     </div>
   );
 }

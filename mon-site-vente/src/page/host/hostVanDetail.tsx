@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, Outlet } from "react-router-dom";
+import type { Van } from "../../../type/van";
 import NavigatorDetail from "../../composant/navigatorDetail";
 
-interface Van {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-  urlImage: string;
-  type: string;
+const vanColor: Record<Van["type"], string>={
+  luxury:'bg-primary-500',
+   simple:'bg-primary-700',
+   rugged:'bg-primary-900' 
 }
 
 export default function HostVanDetail() {
@@ -45,12 +43,7 @@ export default function HostVanDetail() {
             className="w-full h-64 object-cover rounded"
           />
           <i
-            className={`inline-block mt-2 px-2 py-1 text-sm rounded text-white ${
-              van.type === "luxury"
-                ? "bg-yellow-500"
-                : van.type === "camper"
-                ? "bg-green-500"
-                : "bg-red-500"
+            className={`inline-block mt-2 px-2 py-1 text-sm rounded text-white ${vanColor[van.type] 
             }`}
           >
             {van.type}
