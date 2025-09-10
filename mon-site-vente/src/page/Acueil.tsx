@@ -26,7 +26,7 @@ export default function Home() {
           </p>
           <Link to="van">
             <button className="bg-primary-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-600 hover:scale-105 transition-all">
-              Explorer nos vans
+              Explorer
             </button>
           </Link>
         </div>
