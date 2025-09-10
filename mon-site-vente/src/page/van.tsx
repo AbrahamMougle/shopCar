@@ -43,7 +43,7 @@ export default function Vans() {
       </div>
 
       {/* Titre */}
-      <h1 className="text-3xl font-bold text-center text-gray-900 mb-10">
+      <h1 className="text-2xl md:text-3xl font-normal text-center text-gray-900 mb-5">
         Explorez nos vans
       </h1>
 

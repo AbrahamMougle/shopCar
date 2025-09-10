@@ -1,16 +1,8 @@
 import { Link, useLoaderData } from "react-router-dom";
 import fetcher from "../../function/fetchVan";
+import type { Van } from "../../../type/van";
 export async function loaderHost(): Promise<{ vans: Van[] }> {
     return await fetcher('/api/vans')
-}
-
-interface Van {
-    id: number;
-    name: string;
-    price: number;
-    description: string;
-    urlImage: string;
-    type: "luxury" | "rugged" | "simple";
 }
 
 export default function HostVans() {
@@ -22,7 +14,7 @@ export default function HostVans() {
     };
     return (
         <>
-            <h1 className="text-3xl font-bold">Explore Our Van option </h1>
+            <h1 className="text-2xl  text-center font-normal md:text-3xl">Explore Our Van option </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
                 {vans?.map(van => (
                     <div key={van.id} className="border rounded-lg overflow-hidden shadow-lg">
