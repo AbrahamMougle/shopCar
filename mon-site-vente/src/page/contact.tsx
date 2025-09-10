@@ -38,7 +38,7 @@ export async function action({ request }: ActionFunctionArgs) {
   localStorage.setItem("isAuth", "true");
 
   const response = redirect(pathname);
-  
+  response.body=true
   throw response;
 }
 
