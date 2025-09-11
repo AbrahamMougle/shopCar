@@ -30,11 +30,11 @@ const routesApp = [
       { path: "about", element: <About />, loader:({ request }: { request: Request }) => { requireAuth(request) } },
       { path: "connecte", element: <Contact />, action: action, },
       { path: "register", element: <Resgister />},
-      { path: 'van', element: <Vans />, loader: datafetch },
-      { path: "van/:id", element: <VanDetail />, loader: loaderData },
+      { path: 'rente', element: <Vans />, loader: datafetch },
+      { path: "rente/:id", element: <VanDetail />, loader: loaderData },
 
       {
-        path: "host",
+        path: "myvan",
         element: <LayoutHost />,
         children: [ 
           { index:true ,path: "income", element: <Income /> },
@@ -45,7 +45,6 @@ const routesApp = [
             element: <HostVanDetail />,
             children: [
               { index: true, element: <HostDetailInfo /> },
-    
               { path: "photo", element: <HostDetailPhoto /> },
             ],
           },

@@ -37,9 +37,9 @@ export default function Header() {
       {isOpen && (
         <nav className="md:hidden bg-primary-500 border-t border-primary-700">
           <div className="flex flex-col gap-4 px-6 py-4 text-base font-medium">
-           <CustomNavLink to="host">Shop</CustomNavLink>
+           <CustomNavLink to="myvan">Myvan</CustomNavLink>
           <CustomNavLink to="about">About</CustomNavLink>
-          <CustomNavLink to="van">shop</CustomNavLink>
+          <CustomNavLink to="rente">Rente</CustomNavLink>
           <CustomNavLink to="connecte">Connect</CustomNavLink>
           </div>
         </nav>
