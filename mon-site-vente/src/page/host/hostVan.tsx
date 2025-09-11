@@ -7,6 +7,7 @@ export async function loaderHost(): Promise<{ vans: Van[] }> {
 
 export default function HostVans() {
     const vans = useLoaderData<typeof loaderHost>().vans
+   
     const typeColors: Record<Van["type"], string> = {
         luxury: "bg-primary-500",
         rugged: "bg-primary-700",

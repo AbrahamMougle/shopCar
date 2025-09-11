@@ -5,7 +5,6 @@ import './function/server'
 import Layout from "./page/Layout"
 import Income from "./page/host/income"
 import LayoutHost from "./composant/layoutHeader"
-import Review from "./page/host/review"
 import HostDetailInfo from "./page/hostVandetailInfo"
 import HostDetailPhoto from "./page/host/hostDetailPhoto"
 import HostVanDetail from "./page/host/hostVanDetail"
@@ -37,8 +36,8 @@ export const routesApp = [
         element: <LayoutHost />,
         children: [
           { path: "income", element: <Income /> },
-          { path: "review", element: <Review /> },
-          { index: true, path: "vans", element: <HostVans />, loader: loaderHost },
+         
+          { index: true, element: <HostVans />, loader: loaderHost },
           {
             path: "vans/:id",
             element: <HostVanDetail />,
