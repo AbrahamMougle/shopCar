@@ -18,9 +18,9 @@ export default function Header() {
 
         {/* Menu desktop */}
         <nav className="hidden md:flex gap-6  ">
-          <CustomNavLink to="host">Shop</CustomNavLink>
+          <CustomNavLink to="myvan">Myvan</CustomNavLink>
           <CustomNavLink to="about">About</CustomNavLink>
-          <CustomNavLink to="van">shop</CustomNavLink>
+          <CustomNavLink to="rente">Rente</CustomNavLink>
           <CustomNavLink to="connecte">Connect</CustomNavLink>
         </nav>
 
