@@ -15,18 +15,20 @@ type FetchError = {
   status?: number;
 };
 export async function action({ request }: ActionFunctionArgs) {
+
   const pathname = new URL(request.url).searchParams.get("redirectTo") || "/";
+  console.log(request);
 
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
- 
+
   await new Promise((resolve) => setTimeout(resolve, 1000)); // simulate delay
 
   const res = await fetch("/api/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({  email, password }),    
+    body: JSON.stringify({ email, password }),
   });
 
   if (!res.ok) {
@@ -35,9 +37,12 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   localStorage.setItem("isAuth", "true");
+  const redirectTo: any = redirect(pathname);// la verification est eteinte 
 
-  return redirect(pathname);
-  
+  redirectTo.body = true
+
+  return redirectTo
+
 }
 
 
@@ -45,16 +50,18 @@ export async function action({ request }: ActionFunctionArgs) {
 export default function Login() {
   const actionData = useActionData<FetchError | null>();
   const navigation = useNavigation().state;
-  const location = useLocation().search;
+  const location = useLocation().state;
+  console.log('Dans mon contact', location);
+
   const urlparam = new URLSearchParams(location).get("message");
 
   return (
     <AuthLayout
       title="🚐 Connexion"
       message={urlparam || (actionData && `${actionData.statusText}: ${actionData.message}`)}
-      >
-        
-      <Form method="post" replace className="space-y-4">
+    >
+
+      <Form method="post" action="/connecte" replace className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Email
@@ -95,12 +102,12 @@ export default function Login() {
         </button>
       </Form>
       <>
-          Pas encore de compte ?{" "}
-          <Link to="/register" className="text-blue-600 hover:underline font-medium">
-            Inscrivez-vous
-          </Link>
-        </>
-  
+        Pas encore de compte ?{" "}
+        <Link to="/register" className="text-blue-600 hover:underline font-medium">
+          Inscrivez-vous
+        </Link>
+      </>
+
     </AuthLayout>
   );
 }
