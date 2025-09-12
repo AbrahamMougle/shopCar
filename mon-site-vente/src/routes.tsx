@@ -14,7 +14,8 @@ import NotFound from "./page/notFound"
 import HandleErrorRouterVan from "./page/host/handleErrorRoute"
 import Contact, { action } from "./page/contact"
 import Resgister from "./page/Register"
-import requireAuth from "./function/requireAuth"
+import { RequireAuth } from "./composant/requiredAuth"
+
 
 export const routesApp = [
   {
@@ -22,8 +23,8 @@ export const routesApp = [
     element: <Layout />,
     errorElement: <HandleErrorRouterVan />,
     children: [
-      { index: true, element: <Accueil />, loader: async ({ request }: { request: Request }) => { requireAuth(request) } },
-      { path: "about", element: <About />, loader: async ({ request }: { request: Request }) => { requireAuth(request) } },
+      { index: true, element: <RequireAuth><Accueil /></RequireAuth>},
+      { path: "about", element:<RequireAuth><About /></RequireAuth>},
       { path: "connecte", element: <Contact />, action: action, },
       { path: "register", element: <Resgister /> },
       { path: 'rente', element: <Vans />, loader: datafetch },
