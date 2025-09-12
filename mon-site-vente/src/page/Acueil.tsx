@@ -24,7 +24,7 @@ export default function Home() {
             Vivez l&apos;aventure van life avec nos véhicules aménagés. 
             Parcourez les plus beaux paysages et créez des souvenirs inoubliables.
           </p>
-          <Link to="van">
+          <Link to="myvan">
             <button className="bg-primary-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-600 hover:scale-105 transition-all">
               Explorer
             </button>

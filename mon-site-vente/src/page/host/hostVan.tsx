@@ -19,7 +19,7 @@ export default function HostVans() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
                 {vans?.map(van => (
                     <div key={van.id} className="border rounded-lg overflow-hidden shadow-lg">
-                        <Link to={`${van.id}`}>
+                        <Link to={`./${van.id}`}>
                             <img src={van.urlImage} alt={van.name} className="w-full h-48 object-cover" />
                         </Link>
                         <div className="p-4">

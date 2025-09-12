@@ -16,8 +16,6 @@ import Contact, { action } from "./page/contact"
 import Resgister from "./page/Register"
 import requireAuth from "./function/requireAuth"
 
-
-
 export const routesApp = [
   {
     path: "/",
@@ -39,7 +37,7 @@ export const routesApp = [
          
           { index: true, element: <HostVans />, loader: loaderHost },
           {
-            path: "vans/:id",
+            path: ":id",
             element: <HostVanDetail />,
             children: [
               { index: true, element: <HostDetailInfo /> },
