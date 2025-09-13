@@ -48,7 +48,7 @@ export default function About() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-12">
       <h1 className="text-3xl font-bold text-primary-500 mb-4">À propos de nous</h1>
-      <p className="text-gray-600 leading-relaxed mb-8">
+      <p className="text-gray-600 leading-relaxed font-poppins mb-8">
         Bienvenue dans notre boutique ! Nous croyons que chaque voyage mérite un
         véhicule fiable, confortable et adapté à vos besoins. Notre mission est
         de rendre la location de vans simple, accessible et sans stress.
